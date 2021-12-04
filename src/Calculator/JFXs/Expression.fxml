@@ -17,7 +17,7 @@
       </Label>
       <TextField fx:id="input" layoutX="102.0" layoutY="164.0" prefHeight="53.0" prefWidth="497.0" />
       <Button layoutX="294.0" layoutY="261.0" mnemonicParsing="false" onAction="#calculate" prefHeight="46.0" prefWidth="112.0" text="Calculate" />
-      <Label fx:id="answer" alignment="CENTER" layoutX="14.0" layoutY="360.0" prefHeight="78.0" prefWidth="667.0" text="Answer Section">
+      <Label fx:id="answer" alignment="CENTER" layoutX="17.0" layoutY="351.0" prefHeight="83.0" prefWidth="667.0" text="Answer Section">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

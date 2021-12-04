@@ -1,11 +1,8 @@
 package Calculator;
 
 import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.Stack;
 
 public class Expression {
-    private final String operators = "+-*/^()";
     private ArrayList<Character> operatorList;
     private ArrayList<Double> operandList;
 
@@ -15,7 +12,7 @@ public class Expression {
     }
 
     private boolean isOperator(String o) {
-        return operators.contains(o);
+        return "+-*/^()".contains(o);
     }
 
     private boolean isDoubleNumeric(char str) {
@@ -32,73 +29,50 @@ public class Expression {
         return true;
     }
 
-    private boolean parenthesisCheck(String str) {
-        Stack<Character> stack = new Stack<>();
+    boolean parenthesisCheck(String str) {
+        myStack<Character> stack = new myStack<>();
         char c;
-
         for (int i = 0; i < str.length(); i++) {
             c = str.charAt(i);
-
             if (c == '(')
                 stack.push(c);
             else if (c == ')')
-                if (stack.empty())
+                if (stack.isEmpty())
                     return false;
                 else if (stack.peek() == '(')
                     stack.pop();
                 else
                     return false;
         }
-        return stack.empty();
+
+        return stack.isEmpty();
     }
 
 
     private static int getPriority(char op) {
-        switch (op) {
-            case '+':
-            case '-':
-                return 1;
-
-            case '/':
-            case '*':
-                return 2;
-
-            case '^':
-                return 3;
-            case '(':
-            case ')':
-                return 0;
-
-            default:
-                return -1;
-        }
+        return switch (op) {
+            case '+', '-' -> 1;
+            case '/', '*' -> 2;
+            case '^' -> 3;
+            case '(', ')' -> 0;
+            default -> -1;
+        };
     }
 
     private double calculate(char op, double val1, double val2) {
-        switch (op) {
-            case '+':
-                return val1 + val2;
-
-            case '-':
-                return val2 - val1;
-
-            case '*':
-                return val2 * val1;
-
-            case '/':
-                return val2 / val1;
-
-            case '^':
-                return Math.pow(val2, val1);
-
-            default:
-                return 0;
-        }
+        return switch (op) {
+            case '+' -> val1 + val2;
+            case '-' -> val2 - val1;
+            case '*' -> val2 * val1;
+            case '/' -> val2 / val1;
+            case '^' -> Math.pow(val2, val1);
+            default -> 0;
+        };
     }
 
 
-    public String infixToPostfix(String infix){
-        Stack<Character> stack = new Stack<>();
+    public String infixToPostfix(String infix) {
+        myStack<Character> stack = new myStack<>();
         StringBuilder postFix = new StringBuilder();
         StringBuilder temp = new StringBuilder();
 
@@ -128,16 +102,16 @@ public class Expression {
                     }
                     stack.push(operator);
                 } else if (operator == ')') {
-                    if (stack.empty()) {
+                    if (stack.isEmpty()) {
                         throw new RuntimeException("ERROR: Check Your Parenthesis");
                     } else if (stack.peek() == '(') {
                         stack.pop();
                     } else {
-                        while (!stack.empty() && stack.peek() != '(') {
+                        while (!stack.isEmpty() && stack.peek() != '(') {
                             postFix.append(stack.pop());
                             postFix.append(" ");
                         }
-                        if (stack.empty()) {
+                        if (stack.isEmpty()) {
                             throw new RuntimeException("ERROR: Check Your Parenthesis");
                         } else if (stack.peek().equals('(')) {
                             stack.pop();
@@ -154,23 +128,23 @@ public class Expression {
         return postFix.toString();
     }
 
-    public String earlyCheck(String exp){
-        for(int i=0; i<exp.length(); i++){
-            if(exp.charAt(i) == '(' && i+1<exp.length() && (exp.charAt(i+1)==')' || exp.charAt(i+1)=='*' || exp.charAt(i+1)=='/' || exp.charAt(i+1)=='^')){
+    String earlyCheck(String exp) {
+        for (int i = 0; i < exp.length(); i++) {
+            if (exp.charAt(i) == '(' && i + 1 < exp.length() && (exp.charAt(i + 1) == ')' || exp.charAt(i + 1) == '*' || exp.charAt(i + 1) == '/' || exp.charAt(i + 1) == '^')) {
                 return "ERROR: Invalid Expression";
             }
-            if(exp.charAt(i)==')' && i-1>=0 && "+-*/^".contains(String.valueOf(exp.charAt(i-1)))){
-                return  "ERROR: Operator cannot be before ')'";
+            if (exp.charAt(i) == ')' && i - 1 >= 0 && "+-*/^".contains(String.valueOf(exp.charAt(i - 1)))) {
+                return "ERROR: Operator cannot be before ')'";
             }
-            if(!isDoubleNumeric(exp.charAt(i)) && !isOperator(String.valueOf(exp.charAt(i)))){
+            if (!isDoubleNumeric(exp.charAt(i)) && !isOperator(String.valueOf(exp.charAt(i)))) {
                 return "ERROR: Invalid character";
             }
         }
         return "OK";
     }
 
-    public String getExpression(String in) throws Exception{
-        if(!parenthesisCheck(in)){
+    public String getExpression(String in) throws Exception {
+        if (!parenthesisCheck(in)) {
             throw new Exception("ERROR: Check Your Parenthesis");
         }
         StringBuilder str = new StringBuilder();
@@ -193,28 +167,31 @@ public class Expression {
                 if (!input.equals('(') && !input.equals(')')) {
                     try {
                         operatorList.add(input);
-                    } catch (Exception ignored) {}
+                    } catch (Exception ignored) {
+                    }
                 }
                 try {
-                    if (in.charAt(i)== '-' && in.charAt(i - 1) == '(') {
+                    if (in.charAt(i) == '-' && in.charAt(i - 1) == '(') {
                     } else {
                         sb.append(" ");
                     }
-                }catch (Exception ignored){}
+                } catch (Exception ignored) {
+                }
             } else if (isDoubleNumeric(input)) {
                 try {
                     while (isDoubleNumeric(in.charAt(i))) {
                         str.append(in.charAt(i));
                         i++;
                     }
-                }catch (Exception ignored){}
+                } catch (Exception ignored) {
+                }
                 i--;
                 try {
                     sb.append(str);
                     operandList.add(Double.parseDouble(str.toString()));
                     sb.append(" ");
                     str = new StringBuilder();
-                }catch (Exception exception){
+                } catch (Exception exception) {
                     throw new Exception("ERROR: Multiple Points");
                 }
             }
@@ -232,7 +209,7 @@ public class Expression {
     }
 
     public double evaluatePostfix(String postfix) {
-        Stack<Double> stk = new Stack<>();
+        myStack<Double> stk = new myStack<>();
         StringBuilder temp = new StringBuilder();
 
         for (int i = 0; i < postfix.length(); i++) {
@@ -247,7 +224,7 @@ public class Expression {
             } else {
                 try {
                     stk.push(calculate(temp.charAt(0), stk.pop(), stk.pop()));
-                } catch (EmptyStackException e) {
+                } catch (Exception e) {
                     throw new RuntimeException("ERROR: Check Your Operators");
                 }
             }
