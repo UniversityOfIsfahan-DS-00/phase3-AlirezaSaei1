@@ -3,26 +3,120 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="700.0" style="-fx-background-color: #696969;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Calculator.eController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="700.0" style="-fx-background-color: #00203FFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Calculator.eController">
    <children>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Back" />
-      <Label layoutX="102.0" layoutY="105.0" prefHeight="46.0" prefWidth="295.0" text="Enter Your Arithmetic Expression :" textFill="#fcf9f9">
+      <Button layoutX="659.0" layoutY="-4.0" mnemonicParsing="false" onAction="#back" prefHeight="47.0" prefWidth="41.0" style="-fx-background-color: #FF6347; -fx-border-color: #A0522D;" text="X">
          <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="input" layoutX="102.0" layoutY="164.0" prefHeight="53.0" prefWidth="497.0" />
-      <Button layoutX="294.0" layoutY="261.0" mnemonicParsing="false" onAction="#calculate" prefHeight="46.0" prefWidth="112.0" text="Calculate" />
-      <Label fx:id="answer" alignment="CENTER" layoutX="14.0" layoutY="360.0" prefHeight="78.0" prefWidth="667.0" text="Answer Section">
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="462.0" layoutY="401.0" mnemonicParsing="false" onAction="#calculate" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #FFA500; -fx-border-color: #D3D3D3;" text="=" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Label fx:id="answer" alignment="CENTER_RIGHT" layoutY="97.0" prefHeight="72.0" prefWidth="700.0" style="-fx-background-color: #696969;" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Label>
+      <Button fx:id="ce" layoutX="224.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="CE" textFill="WHITE" />
+      <Button fx:id="del" layoutX="343.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="Del" textFill="WHITE" />
+      <Button fx:id="eight" layoutX="343.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="8" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="nine" layoutX="462.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="9" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="multiple" layoutX="581.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="divide" layoutX="581.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="/" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="seven" layoutX="224.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="7" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="two" layoutX="343.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="2" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="one" layoutX="224.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="1" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="minus" alignment="TOP_CENTER" layoutX="581.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="_" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="six" layoutX="462.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="6" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="five" layoutX="343.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="5" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="four" layoutX="224.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="4" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="zero" layoutX="343.0" layoutY="401.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="dot" layoutX="224.0" layoutY="401.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="." textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="add" layoutX="581.0" layoutY="401.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="+" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="three" layoutX="462.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="3" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="power" layoutX="581.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="^" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="p1" layoutX="462.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="59.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="(" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="p2" layoutX="521.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="59.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text=")" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <ListView layoutY="198.0" prefHeight="275.0" prefWidth="225.0" style="-fx-background-color: #606060FF; -fx-border-color: #D3D3D3;" />
+      <Label alignment="CENTER" layoutY="169.0" prefHeight="29.0" prefWidth="225.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="HISTORY" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="input" alignment="CENTER_RIGHT" layoutY="44.0" prefHeight="56.0" prefWidth="700.0" style="-fx-background-color: #696969;" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

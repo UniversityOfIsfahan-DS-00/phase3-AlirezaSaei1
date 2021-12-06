@@ -33,16 +33,6 @@ class Polynomial {
         return answer;
     }
 
-    Polynomial minus(){
-        Polynomial answer = new Polynomial();
-        Polynomial integral = this.integrate();
-        Polynomial dev = this.derivative();
-        answer.terms = integral.terms;
-        for(int i=0; i<dev.terms.size(); i++){
-            answer.terms.add(new Term((-1*dev.terms.get(i).coefficient), dev.terms.get(i).power));
-        }
-        return answer;
-    }
 
     Polynomial simplification() {
         for (int i = 0; i < terms.size(); i++) {

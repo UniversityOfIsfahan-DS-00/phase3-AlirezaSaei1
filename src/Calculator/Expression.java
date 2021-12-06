@@ -224,6 +224,7 @@ public class Expression {
             } else {
                 try {
                     stk.push(calculate(temp.charAt(0), stk.pop(), stk.pop()));
+
                 } catch (Exception e) {
                     throw new RuntimeException("ERROR: Check Your Operators");
                 }
