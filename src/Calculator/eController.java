@@ -1,6 +1,5 @@
 package Calculator;
 
-import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,11 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class eController implements Initializable {
 
@@ -55,22 +56,34 @@ public class eController implements Initializable {
     Label input;
     @FXML
     Label answer;
+    @FXML
+    ListView<String> steps;
     public void calculate(ActionEvent e){
+        steps.getItems().clear();
         try {
             Expression exp = new Expression();
             String inp = input.getText();
             String check = exp.earlyCheck(inp);
+
             if(!check.equals("OK")){
                 throw new Exception(check);
             }
+
             String infix = exp.getExpression(inp);
             String postfix = exp.infixToPostfix(infix);
             double solution = exp.evaluatePostfix(postfix);
+
             System.out.println("Postfix: " + postfix);
             answer.setStyle("-fx-text-fill: #FFFFFF; -fx-background-color:  #696969;");
             answer.setText(String.valueOf(solution));
-        }catch (Exception exception){
+            Expression.stepByStep.add("Final Value: " + solution);
+            List<String> newList = Expression.stepByStep.stream()
+                    .distinct()
+                    .collect(Collectors.toList());
 
+            steps.getItems().addAll(newList);
+
+        }catch (Exception exception){
             answer.setStyle("-fx-text-fill: #ed7068; -fx-background-color:  #696969");
             answer.setText(exception.getMessage());
         }
@@ -87,10 +100,14 @@ public class eController implements Initializable {
     @FXML Button ce;       @FXML Button del;
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        btn(del, ce, one, two, three, four, five, six, seven);
+        btn(nine, zero, dot, p1, p2, add, minus, multiple, divide);
+        power.setSkin(new MyButtonSkin(power));
+        eight.setSkin(new MyButtonSkin(eight));
+
+
         one.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 input.setText(input.getText() + "1");
@@ -184,6 +201,8 @@ public class eController implements Initializable {
         ce.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 input.setText("");
+                steps.getItems().clear();
+                answer.setText("");
             }
         });
         del.setOnAction(new EventHandler<ActionEvent>() {
@@ -192,5 +211,17 @@ public class eController implements Initializable {
             }
         });
 
+    }
+
+    private void btn(Button nine, Button zero, Button dot, Button p1, Button p2, Button add, Button minus, Button multiple, Button divide) {
+        nine.setSkin(new MyButtonSkin(nine));
+        zero.setSkin(new MyButtonSkin(zero));
+        dot.setSkin(new MyButtonSkin(dot));
+        p1.setSkin(new MyButtonSkin(p1));
+        p2.setSkin(new MyButtonSkin(p2));
+        add.setSkin(new MyButtonSkin(add));
+        minus.setSkin(new MyButtonSkin(minus));
+        multiple.setSkin(new MyButtonSkin(multiple));
+        divide.setSkin(new MyButtonSkin(divide));
     }
 }

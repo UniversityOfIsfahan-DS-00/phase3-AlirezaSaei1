@@ -1,8 +1,11 @@
 package Calculator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Stack;
 
 public class Expression {
+    public static ArrayList<String> stepByStep;
     private ArrayList<Character> operatorList;
     private ArrayList<Double> operandList;
 
@@ -175,8 +178,7 @@ public class Expression {
                     } else {
                         sb.append(" ");
                     }
-                } catch (Exception ignored) {
-                }
+                } catch (Exception ignored) {}
             } else if (isDoubleNumeric(input)) {
                 try {
                     while (isDoubleNumeric(in.charAt(i))) {
@@ -209,6 +211,11 @@ public class Expression {
     }
 
     public double evaluatePostfix(String postfix) {
+        System.out.println(postfix);
+        String p = postfixToInfix(postfix);
+        System.out.println("Infix: " + p);
+        stepByStep = new ArrayList<>();
+        stepByStep.add(p);
         myStack<Double> stk = new myStack<>();
         StringBuilder temp = new StringBuilder();
 
@@ -223,14 +230,59 @@ public class Expression {
                 stk.push(Double.valueOf(temp.toString()));
             } else {
                 try {
-                    stk.push(calculate(temp.charAt(0), stk.pop(), stk.pop()));
+                    double x, y;
+                    char op;
+                    String x1, y1, res1;
+                    double res = calculate(op=temp.charAt(0), x=stk.pop(), y=stk.pop());
+                    if(x%1==0){
+                        x1 = String.format("%.0f", x);
+                    }else{
+                        x1 = String.valueOf(x);
+                    }
+                    if(y%1==0){
+                        y1 = String.format("%.0f", y);
+                    }else{
+                        y1 = String.valueOf(y);
+                    }
+                    if(res%1==0){
+                        res1 = String.format("%.0f", res);
+                    }else{
+                        res1 = String.valueOf(res);
+                    }
 
+                    p = p.replace("("+y1+op+x1+")", res1);
+                    stepByStep.add(p);
+                    stk.push(res);
                 } catch (Exception e) {
                     throw new RuntimeException("ERROR: Check Your Operators");
                 }
             }
         }
         return stk.pop();
+    }
+
+    public String postfixToInfix(String exp) {
+        Stack<String> s = new Stack<>();
+        StringBuilder temp = new StringBuilder();
+
+        for (int i = 0; i < exp.length(); i++) {
+            temp.delete(0, temp.length());
+
+            while(exp.charAt(i) != ' '){
+                temp.append(exp.charAt(i));
+                i++;
+            }
+
+            if (isNumeric(temp.toString())) {
+                s.push(temp.toString());
+            } else {
+                String op1 = s.pop();
+                String op2 = s.pop();
+                s.push("(" + op2 + exp.charAt(i-1) + op1 + ")");
+            }
+        }
+
+        return s.peek();
     }
 }
 //Test:
