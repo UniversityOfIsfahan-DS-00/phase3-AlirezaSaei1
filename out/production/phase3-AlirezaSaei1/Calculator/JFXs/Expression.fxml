@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -30,7 +31,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Button fx:id="multiple" layoutX="620.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="X" textFill="WHITE">
+      <Button fx:id="multiple" layoutX="620.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="*" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -114,10 +115,9 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="input" alignment="CENTER_RIGHT" layoutY="44.0" prefHeight="56.0" prefWidth="700.0" style="-fx-background-color: #696969;" textFill="WHITE">
+      <TextField fx:id="input" alignment="CENTER_RIGHT" layoutY="50.0" prefHeight="47.0" prefWidth="700.0" style="-fx-background-color: #696969;">
          <font>
             <Font size="18.0" />
-         </font>
-      </Label>
+         </font></TextField>
    </children>
 </AnchorPane>

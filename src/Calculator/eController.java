@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -53,7 +54,7 @@ public class eController implements Initializable {
     }
 
     @FXML
-    Label input;
+    TextField input;
     @FXML
     Label answer;
     @FXML
@@ -106,7 +107,7 @@ public class eController implements Initializable {
         btn(nine, zero, dot, p1, p2, add, minus, multiple, divide);
         power.setSkin(new MyButtonSkin(power));
         eight.setSkin(new MyButtonSkin(eight));
-
+        input.setStyle("-fx-text-fill: white; -fx-background-color: #696969");
 
         one.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
@@ -207,7 +208,9 @@ public class eController implements Initializable {
         });
         del.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                input.setText(input.getText().substring(0,input.getText().length()-1));
+                try {
+                    input.setText(input.getText().substring(0, input.getText().length() - 1));
+                }catch (Exception ignored){}
             }
         });
 

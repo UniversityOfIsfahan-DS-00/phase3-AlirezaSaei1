@@ -1,7 +1,6 @@
 package Calculator;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Stack;
 
 public class Expression {
@@ -178,7 +177,8 @@ public class Expression {
                     } else {
                         sb.append(" ");
                     }
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
             } else if (isDoubleNumeric(input)) {
                 try {
                     while (isDoubleNumeric(in.charAt(i))) {
