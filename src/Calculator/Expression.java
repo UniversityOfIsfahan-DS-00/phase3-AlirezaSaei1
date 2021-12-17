@@ -5,6 +5,7 @@ import java.util.Stack;
 
 public class Expression {
     public static ArrayList<String> stepByStep;
+    public static String postfix;
     private ArrayList<Character> operatorList;
     private ArrayList<Double> operandList;
 
@@ -127,7 +128,7 @@ public class Expression {
             postFix.append(" ");
         }
 
-        return postFix.toString();
+        return postfix = postFix.toString();
     }
 
     String earlyCheck(String exp) {

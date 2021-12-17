@@ -119,5 +119,6 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
+      <Button fx:id="tree" disable="true" layoutX="539.0" layoutY="11.0" mnemonicParsing="false" onAction="#expTree" text="Show Expression Tree" />
    </children>
 </AnchorPane>

@@ -1,7 +1,6 @@
 package Calculator;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +24,7 @@ public class eController implements Initializable {
     private Scene scene;
     private Parent root;
 
-    public void show(ActionEvent e){
+    public void show(ActionEvent e) {
         try {
             root = FXMLLoader.load(getClass().getResource("JFXs/Expression.fxml"));
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -39,7 +38,87 @@ public class eController implements Initializable {
         }
     }
 
-    public void back(ActionEvent e){
+
+    public void expTree(ActionEvent e) {
+        TreeNode n = expressionTree(Expression.postfix);
+        System.out.println("====================EXPRESSION TREE====================");
+        System.out.println(traversePreOrder(n));
+    }
+
+
+    public static TreeNode expressionTree(String postfix) {
+        myStack<TreeNode> st = new myStack<>();
+        TreeNode t1, t2, temp;
+        StringBuilder sb;
+
+        for (int i = 0; i < postfix.length(); i++) {
+            sb = new StringBuilder();
+            while (postfix.charAt(i) != ' ') {
+                sb.append(postfix.charAt(i++));
+            }
+            if (!"+-*/^".contains(String.valueOf(sb))) {
+                temp = new TreeNode(String.valueOf(sb));
+                st.push(temp);
+            } else {
+                temp = new TreeNode(String.valueOf(sb));
+
+                t1 = st.pop();
+                t2 = st.pop();
+
+                temp.left = t1;
+                temp.right = t2;
+
+                st.push(temp);
+            }
+
+        }
+        temp = st.pop();
+        return temp;
+    }
+
+    public String traversePreOrder(TreeNode root) {
+
+        if (root == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(root.data);
+
+        String pointerRight = "└──";
+        String pointerLeft = (root.right != null) ? "├──" : "└──";
+
+        traverseNodes(sb, "", pointerLeft, root.left, root.right != null);
+        traverseNodes(sb, "", pointerRight, root.right, false);
+
+        return sb.toString();
+    }
+
+    public void traverseNodes(StringBuilder sb, String padding, String pointer, TreeNode node,
+                              boolean hasRightSibling) {
+        if (node != null) {
+            sb.append("\n");
+            sb.append(padding);
+            sb.append(pointer);
+            sb.append(node.data);
+
+            StringBuilder paddingBuilder = new StringBuilder(padding);
+            if (hasRightSibling) {
+                paddingBuilder.append("│  ");
+            } else {
+                paddingBuilder.append("   ");
+            }
+
+            String paddingForBoth = paddingBuilder.toString();
+            String pointerRight = "└──";
+            String pointerLeft = (node.right != null) ? "├──" : "└──";
+
+            traverseNodes(sb, paddingForBoth, pointerLeft, node.left, node.right != null);
+            traverseNodes(sb, paddingForBoth, pointerRight, node.right, false);
+        }
+    }
+
+    public void back(ActionEvent e) {
         try {
             root = FXMLLoader.load(getClass().getResource("JFXs/Main.fxml"));
             stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -59,14 +138,14 @@ public class eController implements Initializable {
     Label answer;
     @FXML
     ListView<String> steps;
-    public void calculate(ActionEvent e){
+    public void calculate(ActionEvent e) {
         steps.getItems().clear();
         try {
             Expression exp = new Expression();
             String inp = input.getText();
             String check = exp.earlyCheck(inp);
 
-            if(!check.equals("OK")){
+            if (!check.equals("OK")) {
                 throw new Exception(check);
             }
 
@@ -83,134 +162,64 @@ public class eController implements Initializable {
                     .collect(Collectors.toList());
 
             steps.getItems().addAll(newList);
-
-        }catch (Exception exception){
+            tree.setDisable(false);
+        } catch (Exception exception) {
+            tree.setDisable(true);
             answer.setStyle("-fx-text-fill: #ed7068; -fx-background-color:  #696969");
             answer.setText(exception.getMessage());
         }
     }
-    @FXML Button one;      @FXML Button two;
-    @FXML Button three;    @FXML Button four;
-    @FXML Button five;     @FXML Button six;
-    @FXML Button seven;    @FXML Button eight;
-    @FXML Button nine;     @FXML Button zero;
-    @FXML Button dot;      @FXML Button p1;
-    @FXML Button p2;       @FXML Button add;
-    @FXML Button minus;    @FXML Button multiple;
-    @FXML Button divide;   @FXML Button power;
-    @FXML Button ce;       @FXML Button del;
+
+    @FXML Button one;@FXML Button two;
+    @FXML Button three;
+    @FXML Button four;@FXML Button five;
+    @FXML Button six;@FXML Button seven;
+    @FXML Button eight;@FXML Button nine;
+    @FXML Button zero;@FXML Button dot;
+    @FXML Button p1;@FXML Button p2;
+    @FXML Button add;@FXML Button minus;
+    @FXML Button multiple;@FXML Button divide;
+    @FXML Button power;@FXML Button ce;
+    @FXML Button del;@FXML Button tree;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         btn(del, ce, one, two, three, four, five, six, seven);
         btn(nine, zero, dot, p1, p2, add, minus, multiple, divide);
         power.setSkin(new MyButtonSkin(power));
         eight.setSkin(new MyButtonSkin(eight));
         input.setStyle("-fx-text-fill: white; -fx-background-color: #696969");
 
-        one.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "1");
-            }
+        one.setOnAction(e -> input.setText(input.getText() + "1"));
+        two.setOnAction(e -> input.setText(input.getText() + "2"));
+        three.setOnAction(e -> input.setText(input.getText() + "3"));
+        four.setOnAction(e -> input.setText(input.getText() + "4"));
+        five.setOnAction(e -> input.setText(input.getText() + "5"));
+        six.setOnAction(e -> input.setText(input.getText() + "6"));
+        seven.setOnAction(e -> input.setText(input.getText() + "7"));
+        eight.setOnAction(e -> input.setText(input.getText() + "8"));
+        nine.setOnAction(e -> input.setText(input.getText() + "9"));
+        zero.setOnAction(e -> input.setText(input.getText() + "0"));
+        p1.setOnAction(e -> input.setText(input.getText() + "("));
+        p2.setOnAction(e -> input.setText(input.getText() + ")"));
+        add.setOnAction(e -> input.setText(input.getText() + "+"));
+        minus.setOnAction(e -> input.setText(input.getText() + "-"));
+        multiple.setOnAction(e -> input.setText(input.getText() + "*"));
+        divide.setOnAction(e -> input.setText(input.getText() + "/"));
+        power.setOnAction(e -> input.setText(input.getText() + "^"));
+        dot.setOnAction(e -> input.setText(input.getText() + "."));
+        ce.setOnAction(e -> {
+            input.setText("");
+            steps.getItems().clear();
+            answer.setText("");
+            tree.setDisable(true);
         });
-        two.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "2");
-            }
-        });
-        three.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "3");
-            }
-        });
-        four.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "4");
-            }
-        });
-        five.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "5");
-            }
-        });
-        six.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "6");
-            }
-        });
-        seven.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "7");
-            }
-        });
-        eight.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "8");
-            }
-        });
-        nine.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "9");
-            }
-        });
-        zero.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "0");
-            }
-        });
-        p1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "(");
-            }
-        });
-        p2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + ")");
-            }
-        });
-        add.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "+");
-            }
-        });
-        minus.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "-");
-            }
-        });
-        multiple.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "*");
-            }
-        });
-        divide.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "/");
-            }
-        });
-        power.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + "^");
-            }
-        });
-        dot.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText(input.getText() + ".");
-            }
-        });
-        ce.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                input.setText("");
-                steps.getItems().clear();
-                answer.setText("");
-            }
-        });
-        del.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                try {
-                    input.setText(input.getText().substring(0, input.getText().length() - 1));
-                }catch (Exception ignored){}
+        del.setOnAction(e -> {
+            try {
+                input.setText(input.getText().substring(0, input.getText().length() - 1));
+            } catch (Exception ignored) {
             }
         });
 
