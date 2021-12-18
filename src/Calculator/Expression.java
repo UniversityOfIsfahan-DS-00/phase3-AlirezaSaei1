@@ -1,5 +1,4 @@
 package Calculator;
-
 import java.util.ArrayList;
 import java.util.Stack;
 

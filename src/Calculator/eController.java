@@ -7,10 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -42,7 +39,14 @@ public class eController implements Initializable {
     public void expTree(ActionEvent e) {
         TreeNode n = expressionTree(Expression.postfix);
         System.out.println("====================EXPRESSION TREE====================");
-        System.out.println(traversePreOrder(n));
+        String content = traversePreOrder(n);
+        System.out.println(content);
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Tree View");
+        a.setHeaderText("Expression Tree");
+        a.setResizable(true);
+        a.setContentText(content);
+        a.showAndWait();
     }
 
 
