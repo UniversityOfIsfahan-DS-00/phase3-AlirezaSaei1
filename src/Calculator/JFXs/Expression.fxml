@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="700.0" style="-fx-background-color: #00203FFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Calculator.eController">
+   <children>
+      <Button mnemonicParsing="false" onAction="#back" prefHeight="47.0" prefWidth="59.0" style="-fx-background-color: #FF6347; -fx-border-color: #A0522D;" text="Back">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="502.0" layoutY="401.0" mnemonicParsing="false" onAction="#calculate" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #FFA500; -fx-border-color: #D3D3D3;" text="=" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Label fx:id="answer" alignment="CENTER_RIGHT" layoutY="97.0" prefHeight="72.0" prefWidth="700.0" style="-fx-background-color: #696969;" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Label>
+      <Button fx:id="ce" layoutX="264.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="CE" textFill="WHITE" />
+      <Button fx:id="del" layoutX="383.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="Del" textFill="WHITE" />
+      <Button fx:id="eight" layoutX="383.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="8" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="multiple" layoutX="620.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="*" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="divide" layoutX="620.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="/" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="seven" layoutX="264.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="7" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="two" layoutX="383.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="2" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="one" layoutX="264.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="1" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="minus" alignment="TOP_CENTER" layoutX="620.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="_" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="six" layoutX="502.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="6" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="five" layoutX="383.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="5" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="four" layoutX="264.0" layoutY="289.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="4" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="zero" layoutX="383.0" layoutY="401.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="dot" layoutX="264.0" layoutY="401.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="119.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="." textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="add" layoutX="620.0" layoutY="401.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="+" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="three" layoutX="502.0" layoutY="345.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="3" textFill="#fffefe">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="power" layoutX="620.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="80.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="^" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="p1" layoutX="502.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="59.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text="(" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="p2" layoutX="561.0" layoutY="170.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="59.0" style="-fx-background-color: #00203FFF; -fx-border-color: #D3D3D3;" text=")" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="nine" layoutX="502.0" layoutY="235.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="119.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="9" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <ListView fx:id="steps" layoutY="198.0" prefHeight="275.0" prefWidth="265.0" style="-fx-background-color: #606060FF; -fx-border-color: #D3D3D3;" />
+      <Label alignment="CENTER" layoutY="169.0" prefHeight="29.0" prefWidth="265.0" style="-fx-background-color: #778899; -fx-border-color: #D3D3D3;" text="STEP-BY-STEP" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="input" alignment="CENTER_RIGHT" layoutY="50.0" prefHeight="47.0" prefWidth="700.0" style="-fx-background-color: #696969;">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button fx:id="tree" disable="true" layoutX="539.0" layoutY="11.0" mnemonicParsing="false" onAction="#expTree" text="Show Expression Tree" />
+   </children>
+</AnchorPane>
